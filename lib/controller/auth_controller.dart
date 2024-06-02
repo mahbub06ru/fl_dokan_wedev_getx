@@ -1,4 +1,4 @@
-import 'package:dokan/home_page.dart';
+import 'package:dokan/product_page.dart';
 import 'package:dokan/update_user_page.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -36,7 +36,7 @@ class AuthController extends GetxController {
       print("First Name: ${firstName.value}");
       print("Last Name: ${lastName.value}");
 
-      Get.to(() => HomePage());
+      Get.to(() => ProductPage());
     } else {
       Get.snackbar('Error', 'Login failed');
     }

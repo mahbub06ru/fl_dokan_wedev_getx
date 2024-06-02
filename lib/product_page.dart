@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'controller/home_controller.dart';
 
 
-class HomePage extends StatelessWidget {
+class ProductPage extends StatelessWidget {
   final HomeController controller = Get.put(HomeController());
 
   @override
@@ -94,31 +94,33 @@ class HomePage extends StatelessWidget {
         baseColor: Colors.grey[300]!,
         highlightColor: Colors.grey[100]!,
         child: Card(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: double.infinity,
-                height: 120.0,
-                color: Colors.white,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
                   width: double.infinity,
-                  height: 20.0,
+                  height: 120.0,
                   color: Colors.white,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Container(
-                  width: 80.0,
-                  height: 20.0,
-                  color: Colors.white,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 20.0,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Container(
+                    width: 80.0,
+                    height: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

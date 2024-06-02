@@ -1,8 +1,12 @@
-import 'package:dokan/home_page.dart';
+import 'package:dokan/product_page.dart';
 import 'package:dokan/update_user_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'features/home/home_page.dart';
+import 'features/sign_in/sign_in_page.dart';
 import 'login_page.dart';
 
 //resources
@@ -18,18 +22,30 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
       ),
-      initialRoute: '/',
-      getPages: [
-        GetPage(name: '/', page: () => LoginPage()),
-        GetPage(name: '/update', page: () => UpdateUserPage()),
-        GetPage(name: '/home', page: () => HomePage()),
-      ],
     );
+    return ScreenUtilInit(
+        designSize:  const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, child) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            // initialRoute: '/',
+            initialRoute: '/SignInScreen',
+            getPages: [
+              GetPage(name: '/', page: () => LoginPage()),
+              GetPage(name: '/SignInScreen', page: () => SignInScreen()),
+              GetPage(name: '/update', page: () => UpdateUserPage()),
+              GetPage(name: '/home', page: () => ProductPage()),
+              GetPage(name: '/MyHomePage', page: () => MyHomePage()),
+            ],
+          );
+        });
   }
 }

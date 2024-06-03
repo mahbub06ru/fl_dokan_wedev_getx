@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../product_page.dart';
+import '../profile/account_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ProductPage(),
         ProductPage(),
         ProductPage(),
-        ProductPage(),
+        AccountPage(),
       ],
       actionBarView: Container(
         height: 66.h,

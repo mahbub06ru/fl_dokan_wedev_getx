@@ -25,8 +25,8 @@ class RoundedButtonColored extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: double.infinity,
-        height: 70.h,
-        padding:  EdgeInsets.symmetric(horizontal: 32.w, vertical: 17.h),
+        height: 61.h,
+        padding:  EdgeInsets.symmetric(horizontal: 17.w, vertical: 17.h),
         decoration: ShapeDecoration(
           color: color,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),

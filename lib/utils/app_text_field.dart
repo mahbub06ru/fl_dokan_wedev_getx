@@ -48,7 +48,7 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60.h,
+      height: 61.h,
       child: TextField(
         maxLines: maxLines,
         controller: controller,
@@ -60,7 +60,8 @@ class AppTextField extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
         decoration: InputDecoration(
-          fillColor: Colors.grey[200],
+          fillColor: Colors.white,
+          filled: true, // Ensures the fillColor is applied
           prefixIcon: prefixIcon != null
               ? Container(
             width: 16.67.w, // Set the width of the prefix icon
@@ -69,7 +70,7 @@ class AppTextField extends StatelessWidget {
             child: prefixIcon,
           )
               : null,
-          suffixIcon:  suffixIcon != null
+          suffixIcon: suffixIcon != null
               ? Container(
             width: 16.67.w, // Set the width of the prefix icon
             height: 14.17.h, // Set the height of the prefix icon
@@ -89,20 +90,25 @@ class AppTextField extends StatelessWidget {
             fontSize: 14.sp,
             color: Color(0xFF7E8BA0),
           ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 0.3.r), // Custom underline when enabled
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.r), // Rounded corners
+            borderSide: BorderSide(color: Colors.grey, width: 0.3.r), // Custom border when enabled
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 0.3.r), // Custom underline when focused
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.r), // Rounded corners
+            borderSide: BorderSide(color: Colors.grey, width: 0.3.r), // Custom border when focused
           ),
-          errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 0.3.r), // Custom underline when error
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.r), // Rounded corners
+            borderSide: BorderSide(color: Colors.grey, width: 0.3.r), // Custom border when error
           ),
-          disabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 0.3.r), // Custom underline when disabled
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.r), // Rounded corners
+            borderSide: BorderSide(color: Colors.grey, width: 0.3.r), // Custom border when disabled
           ),
         ),
-      ),
+      )
+      ,
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'features/home/home_page.dart';
+import 'features/sign_up/profile_update_page.dart';
 import 'features/sign_in/sign_in_page.dart';
 import 'login_page.dart';
 
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
               GetPage(name: '/update', page: () => UpdateUserPage()),
               GetPage(name: '/home', page: () => ProductPage()),
               GetPage(name: '/MyHomePage', page: () => MyHomePage()),
+              GetPage(name: '/ProfileUpdatePage', page: () => ProfileUpdatePage()),
             ],
           );
         });

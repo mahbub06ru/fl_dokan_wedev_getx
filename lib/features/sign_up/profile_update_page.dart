@@ -55,69 +55,59 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 70.h),
+              SizedBox(height: 70.h),
 
-                    TextBlack(text: 'Sign Up', textSize: 25.sp,fontWeight: FontWeight.w600,),
-                    SizedBox(height: 24.h),
-                    AppTextField(
-                      textInputType: TextInputType.emailAddress,
-                      controller: emailTextEditingController,
-                      labelText: 'First Name',
-                      hintText: 'First Name',
-                      prefixIcon: SvgPicture.asset(ImageConstants.assetEmail),
-                    ),
-                    SizedBox(height: 24.h),
-                    AppTextField(
-                      textInputType: TextInputType.text,
-                      obsecureText: _passwordVisible,
-                      controller: passwordTextEditingController,
-                      labelText: 'Last Name',
-                      hintText: 'Last Name',
-                      prefixIcon: Padding(
-                        padding:  EdgeInsets.only(left: 8.0.r),
-                        child: SvgPicture.asset(ImageConstants.assetPW),
-                      ),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
-                        child: _passwordVisible
-                            ? Icon(Icons.remove_red_eye_rounded)
-                            : SvgPicture.asset(ImageConstants.assetEye),
-                      ),
-                    ),
-                    SizedBox(height: 70.h),
-                    RoundedButtonColored(
-                      text: 'Sign UP',
-                      onPressed: () {
-                        Get.back();
-                        Get.to(()=> MyHomePage());
-                      },
-                    ),
-                    SizedBox(height: 70.h),
-
-                  ],
+              TextBlack(text: 'Sign Up', textSize: 25.sp,fontWeight: FontWeight.w600,),
+              SizedBox(height: 24.h),
+              AppTextField(
+                textInputType: TextInputType.emailAddress,
+                controller: emailTextEditingController,
+                labelText: 'First Name',
+                hintText: 'First Name',
+                prefixIcon: SvgPicture.asset(ImageConstants.assetEmail),
+              ),
+              SizedBox(height: 24.h),
+              AppTextField(
+                textInputType: TextInputType.text,
+                obsecureText: _passwordVisible,
+                controller: passwordTextEditingController,
+                labelText: 'Last Name',
+                hintText: 'Last Name',
+                prefixIcon: Padding(
+                  padding:  EdgeInsets.only(left: 8.0.r),
+                  child: SvgPicture.asset(ImageConstants.assetPW),
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                  child: _passwordVisible
+                      ? Icon(Icons.remove_red_eye_rounded)
+                      : SvgPicture.asset(ImageConstants.assetEye),
                 ),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Row(
-                  children: [
-                    TextGrey(text: 'Already have an account?', textSize: 14.sp),
-                    SizedBox(width: 5,),
-                    Text('Login', style: TextStyle(
-                        color: Colors.blue
-                    ),),
-                  ],
-                ),
-              )
+              SizedBox(height: 70.h),
+              RoundedButtonColored(
+                text: 'Sign UP',
+                onPressed: () {
+                  Get.back();
+                  Get.to(()=> MyHomePage());
+                },
+              ),
+              SizedBox(height: 70.h),
+
+              Row(
+                children: [
+                  TextGrey(text: 'Already have an account?', textSize: 14.sp),
+                  SizedBox(width: 5,),
+                  Text('Login', style: TextStyle(
+                      color: Colors.blue
+                  ),),
+                ],
+              ),
+
             ],
           ),
         ),

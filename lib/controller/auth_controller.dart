@@ -1,9 +1,13 @@
+import 'package:dokan/features/sign_in/sign_in_page.dart';
 import 'package:dokan/product_page.dart';
 import 'package:dokan/update_user_page.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:jwt_decoder/jwt_decoder.dart';
+
+import '../features/home/home_page.dart';
 
 class AuthController extends GetxController {
   var isLoading = false.obs;
@@ -12,14 +16,20 @@ class AuthController extends GetxController {
   var lastName = ''.obs;
   var token = ''.obs;
 
-  Future<void> login(String username, String password) async {
+  var usernameTextEditingController = TextEditingController().obs;
+  var emailTextEditingController = TextEditingController().obs;
+  var passwordTextEditingController = TextEditingController().obs;
+
+
+
+  Future<void> login() async {
     isLoading.value = true;
     final url = 'https://apptest.dokandemo.com/wp-json/jwt-auth/v1/token';
     final response = await http.post(
       Uri.parse(url),
       body: {
-        'username': username,
-        'password': password,
+        'username': usernameTextEditingController.value.text,
+        'password': passwordTextEditingController.value.text,
       },
     );
 
@@ -36,7 +46,29 @@ class AuthController extends GetxController {
       print("First Name: ${firstName.value}");
       print("Last Name: ${lastName.value}");
 
-      Get.to(() => ProductPage());
+      // Get.back();
+      Get.to(()=> MyHomePage());
+      // Get.to(() => ProductPage());
+    } else {
+      Get.snackbar('Error', 'Login failed');
+    }
+    isLoading.value = false;
+  }
+  Future<void> signUp() async {
+    isLoading.value = true;
+    final url = 'https://apptest.dokandemo.com/wp-json/wp/v2/users/register';
+    final response = await http.post( Uri.parse(url),
+      body: {
+        'username': usernameTextEditingController.value.text,
+        'email': emailTextEditingController.value.text,
+        'password': passwordTextEditingController.value.text,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+
+      Get.to(() => SignInScreen());
     } else {
       Get.snackbar('Error', 'Login failed');
     }

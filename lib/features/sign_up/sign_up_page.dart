@@ -1,3 +1,6 @@
+import 'package:dokan/controller/auth_controller.dart';
+import 'package:dokan/features/home/home_page.dart';
+import 'package:dokan/features/sign_in/sign_in_page.dart';
 import 'package:dokan/utils/image_constants.dart';
 
 
@@ -7,23 +10,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../controller/auth_controller.dart';
 import '../../utils/app_text_field.dart';
 import '../../utils/rounded_button_colored.dart';
 import '../../utils/text_app_color.dart';
 import '../../utils/text_black.dart';
 import '../../utils/text_grey.dart';
-import '../sign_up/profile_update_page.dart';
-import '../sign_up/sign_up_page.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpPageState extends State<SignUpPage> {
   final AuthController controller = Get.put(AuthController());
   var _passwordVisible = true;
 
@@ -51,22 +51,29 @@ class _SignInScreenState extends State<SignInScreen> {
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
+        child: Center(
+          child: Obx((){
+            return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 70.h),
-                SvgPicture.asset(ImageConstants.assetLogo),
-                SizedBox(height: 50.h),
-                TextBlack(text: 'Sign In', textSize: 25.sp,fontWeight: FontWeight.w600,),
+
+                TextBlack(text: 'Sign Up', textSize: 25.sp,fontWeight: FontWeight.w600,),
                 SizedBox(height: 24.h),
                 AppTextField(
                   textInputType: TextInputType.text,
                   controller: controller.usernameTextEditingController.value,
                   labelText: 'Username',
                   hintText: 'Username',
+                  prefixIcon: SvgPicture.asset(ImageConstants.assetEmail),
+                ),
+                SizedBox(height: 24.h),
+                AppTextField(
+                  textInputType: TextInputType.emailAddress,
+                  controller: controller.emailTextEditingController.value,
+                  labelText: 'Email',
+                  hintText: 'Email',
                   prefixIcon: SvgPicture.asset(ImageConstants.assetEmail),
                 ),
                 SizedBox(height: 24.h),
@@ -93,26 +100,40 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 SizedBox(height: 70.h),
                 RoundedButtonColored(
-                  text: 'Sign In',
+                  text: 'Sign UP',
                   onPressed: () {
-                    if(controller.usernameTextEditingController.value.text.trim().isEmpty
-                        || controller.passwordTextEditingController.value.text.trim().isEmpty ){
+                    if(controller.usernameTextEditingController.value.text.isEmpty
+                        || controller.emailTextEditingController.value.text.isEmpty
+                        || controller.passwordTextEditingController.value.text.isEmpty){
                       Get.snackbar('Oops!', 'Need to fill all info');
                     }else{
-                      controller.login();
+                      controller.signUp();
                     }
-
                   },
                 ),
-                SizedBox(height: 50.h),
-                InkWell(onTap:(){
-                  Get.back();
-                  Get.to(()=> SignUpPage());
-                },child: TextGrey(text: 'Create New Account', textSize: 14.sp))
+                SizedBox(height: 70.h),
+
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextGrey(text: 'Already have an account?', textSize: 14.sp),
+                    const SizedBox(width: 5,),
+                    InkWell(
+                      onTap: (){
+                        Get.back();
+                        Get.to(()=>SignInScreen());
+                      },
+                      child: const Text('Login', style: TextStyle(
+                          color: Colors.blue
+                      ),),
+                    ),
+                  ],
+                ),
 
               ],
-            ),
-          ),
+            );
+          })
         ),
       ),
     );

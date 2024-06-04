@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
                 String username = usernameController.text.trim();
                 String password = passwordController.text.trim();
                 if (username.isNotEmpty && password.isNotEmpty) {
-                  loginController.login(username, password);
+                  loginController.login();
                 } else {
                   Get.snackbar('Error', 'Please enter all fields');
                 }

@@ -7,8 +7,8 @@ import 'package:curved_nav_bar/flutter_curved_bottom_nav_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../product_page.dart';
-import '../profile/account_page.dart';
+import 'product_page.dart';
+import '../../profile/screens/account_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override

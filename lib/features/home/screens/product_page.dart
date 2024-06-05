@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
-import 'controller/home_controller.dart';
+import '../../../controller/home_controller.dart';
+import '../../../utils/custom_appbar.dart';
+import '../widgets/product_item.dart';
 
 
 class ProductPage extends StatelessWidget {
@@ -15,18 +18,20 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Product List'),
-        automaticallyImplyLeading: false,
-        actions: [
+      backgroundColor: Colors.white,
+      appBar: CustomAppBar(
+        title:  'Product List',
+        onTap: () {  },
+        buildActions: [
           IconButton(
-            icon: Icon(Icons.filter_list),
+            icon: const Icon(Icons.filter_list),
             onPressed: () {
               showFilterBottomSheet(context);
             },
           ),
         ],
       ),
+
       body: Obx(() => controller.isLoading.value
           ? buildShimmerGrid()
           : buildProductGrid()),
@@ -36,19 +41,20 @@ class ProductPage extends StatelessWidget {
   void showFilterBottomSheet(BuildContext context) {
     Get.bottomSheet(
       Card(
+        color: Colors.white,
         child: Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Filter',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              Divider(),
+              const Divider(),
               CheckboxListTile(
-                title: Text('Newest'),
+                title: const Text('Newest'),
                 value: controller.filter.value == 'newest',
                 onChanged: (bool? value) {
                   if (value != null && value) {
@@ -57,7 +63,7 @@ class ProductPage extends StatelessWidget {
                 },
               ),
               CheckboxListTile(
-                title: Text('Oldest'),
+                title: const Text('Oldest'),
                 value: controller.filter.value == 'oldest',
                 onChanged: (bool? value) {
                   if (value != null && value) {
@@ -66,7 +72,7 @@ class ProductPage extends StatelessWidget {
                 },
               ),
               CheckboxListTile(
-                title: Text('Best Sell'),
+                title: const Text('Best Sell'),
                 value: controller.filter.value == 'best_sell',
                 onChanged: (bool? value) {
                   if (value != null && value) {
@@ -83,12 +89,12 @@ class ProductPage extends StatelessWidget {
 
   Widget buildShimmerGrid() {
     return GridView.builder(
-      padding: EdgeInsets.all(10.0),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      padding: const EdgeInsets.all(10.0),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 3 / 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        childAspectRatio: 5 / 8,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
       ),
       itemCount: 6,
       itemBuilder: (ctx, i) => Shimmer.fromColors(
@@ -130,17 +136,18 @@ class ProductPage extends StatelessWidget {
 
   Widget buildProductGrid() {
     return GridView.builder(
-      padding: EdgeInsets.all(10.0),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      padding: EdgeInsets.all(5.0.w),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 3 / 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        childAspectRatio: 5 / 8,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
       ),
       itemCount: controller.products.length,
       itemBuilder: (ctx, i) => ProductItem(
         name: controller.products[i]['name'],
         price: controller.products[i]['price'],
+        regPrice: controller.products[i]['regular_price'],
         rating: double.parse(controller.products[i]['average_rating'] ?? '0'),
         imageUrl: controller.products[i]['images'][0]['src'],
       ),
@@ -148,79 +155,4 @@ class ProductPage extends StatelessWidget {
   }
 }
 
-class ProductItem extends StatelessWidget {
-  final String name;
-  final String price;
-  final double rating;
-  final String imageUrl;
 
-  ProductItem({
-    required this.name,
-    required this.price,
-    required this.rating,
-    required this.imageUrl,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-              child: Image.network(
-                imageUrl,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return SvgPicture.asset(
-                    'assets/Dokan Logo color.svg',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              name,
-              style: TextStyle(fontWeight: FontWeight.bold),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text('Price: $price'),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: RatingBar.builder(
-              initialRating: rating,
-              minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              itemSize: 20.0,
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {
-                // No-op for display purposes
-              },
-            ),
-          ),
-          SizedBox(height: 8.0),
-        ],
-      ),
-    );
-  }
-}

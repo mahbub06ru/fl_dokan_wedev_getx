@@ -1,13 +1,15 @@
-import 'package:dokan/features/sign_in/sign_in_page.dart';
-import 'package:dokan/product_page.dart';
+import 'package:dokan/features/sign_in/screens/sign_in_page.dart';
+import 'package:dokan/features/home/screens/product_page.dart';
 import 'package:dokan/update_user_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-import '../features/home/home_page.dart';
+import '../features/home/screens/home_page.dart';
+import '../utils/easy_loader.dart';
 
 class AuthController extends GetxController {
   var isLoading = false.obs;
@@ -15,6 +17,8 @@ class AuthController extends GetxController {
   var firstName = ''.obs;
   var lastName = ''.obs;
   var token = ''.obs;
+  var avatar_urls = ''.obs;
+  var name = ''.obs;
 
   var usernameTextEditingController = TextEditingController().obs;
   var emailTextEditingController = TextEditingController().obs;
@@ -23,6 +27,7 @@ class AuthController extends GetxController {
 
 
   Future<void> login() async {
+    showLoader();
     isLoading.value = true;
     final url = 'https://apptest.dokandemo.com/wp-json/jwt-auth/v1/token';
     final response = await http.post(
@@ -53,8 +58,10 @@ class AuthController extends GetxController {
       Get.snackbar('Error', 'Login failed');
     }
     isLoading.value = false;
+    EasyLoading.dismiss();
   }
   Future<void> signUp() async {
+    showLoader();
     isLoading.value = true;
     final url = 'https://apptest.dokandemo.com/wp-json/wp/v2/users/register';
     final response = await http.post( Uri.parse(url),
@@ -73,6 +80,7 @@ class AuthController extends GetxController {
       Get.snackbar('Error', 'Login failed');
     }
     isLoading.value = false;
+    EasyLoading.dismiss();
   }
 
   Future<void> fetchUserInfo(String userId) async {
@@ -90,6 +98,8 @@ class AuthController extends GetxController {
       firstName.value = data['first_name'] ?? '';
       lastName.value = data['last_name'] ?? '';
       this.userId.value = userId;
+      avatar_urls.value = data['avatar_urls']['96'] ?? '';
+      name.value = data['name'] ?? '';
     } else {
       Get.snackbar('Error', 'Failed to fetch user data');
     }
@@ -97,6 +107,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> updateUserInfo(String firstName, String lastName) async {
+    showLoader();
     isLoading.value = true;
     final url = 'https://apptest.dokandemo.com/wp-json/wp/v2/users/${userId.value}';
     print(url);
@@ -122,5 +133,6 @@ class AuthController extends GetxController {
       Get.snackbar('Error', 'Failed to update user info');
     }
     isLoading.value = false;
+    EasyLoading.dismiss();
   }
 }

@@ -1,4 +1,5 @@
 
+import 'package:dokan/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,13 +12,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onTap;
   final VoidCallback? onRightButtonTap;
    bool? automaticallyImplyLeading;
+  List<Widget>? buildActions;
 
    CustomAppBar({
     super.key,
     required this.title,
     required this.onTap,
     this.onRightButtonTap,
-    this.automaticallyImplyLeading = true
+    this.automaticallyImplyLeading = true,
+     this.buildActions
   });
 
   @override
@@ -29,6 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: automaticallyImplyLeading!,
       backgroundColor: Colors.transparent,
       elevation: 0,
+      centerTitle: true,
       leading: InkWell(
         // onTap: onTap,
         onTap: onTap,
@@ -45,13 +49,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title,
         style:  TextStyle(
           color: Colors.black,
-          fontSize: 16.sp,
-          fontFamily: 'Urbanist',
+          fontSize: 23.sp,
+          fontFamily: AppConstants.appFont,
           fontWeight: FontWeight.w700,
         ),
       ),
-      centerTitle: false,
-      actions: _buildActions(),
+
+      actions: buildActions,
     );
   }
   List<Widget> _buildActions() {

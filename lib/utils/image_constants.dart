@@ -12,4 +12,5 @@ class ImageConstants {
   static String assetNoti = 'assets/images/noti.svg';
   static String assetHeart = 'assets/images/heart.svg';
 
+
 }

@@ -1,4 +1,4 @@
-import 'package:dokan/features/home/home_page.dart';
+import 'package:dokan/features/home/screens/home_page.dart';
 import 'package:dokan/utils/image_constants.dart';
 
 
@@ -8,11 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../utils/app_text_field.dart';
-import '../../utils/rounded_button_colored.dart';
-import '../../utils/text_app_color.dart';
-import '../../utils/text_black.dart';
-import '../../utils/text_grey.dart';
+import '../../../utils/app_text_field.dart';
+import '../../../utils/rounded_button_colored.dart';
+import '../../../utils/text_app_color.dart';
+import '../../../utils/text_black.dart';
+import '../../../utils/text_grey.dart';
 
 class ProfileUpdatePage extends StatefulWidget {
   const ProfileUpdatePage({super.key});

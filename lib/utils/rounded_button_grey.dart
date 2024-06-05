@@ -23,8 +23,7 @@ class RoundedButtonGrey extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: 54.h,
-      // padding:  EdgeInsets.symmetric(horizontal: 32.w, vertical: 17.h),
+      height: 61.h,
       decoration: ShapeDecoration(
         color: Color(0xFFF5F5F8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),

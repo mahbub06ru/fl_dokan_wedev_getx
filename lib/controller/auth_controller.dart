@@ -29,7 +29,7 @@ class AuthController extends GetxController {
   Future<void> login() async {
     showLoader();
     isLoading.value = true;
-    final url = 'https://apptest.dokandemo.com/wp-json/jwt-auth/v1/token';
+    const url = 'https://apptest.dokandemo.com/wp-json/jwt-auth/v1/token';
     final response = await http.post(
       Uri.parse(url),
       body: {
@@ -63,7 +63,7 @@ class AuthController extends GetxController {
   Future<void> signUp() async {
     showLoader();
     isLoading.value = true;
-    final url = 'https://apptest.dokandemo.com/wp-json/wp/v2/users/register';
+    const url = 'https://apptest.dokandemo.com/wp-json/wp/v2/users/register';
     final response = await http.post( Uri.parse(url),
       body: {
         'username': usernameTextEditingController.value.text,

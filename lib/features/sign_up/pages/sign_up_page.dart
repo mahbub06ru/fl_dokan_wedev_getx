@@ -94,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       });
                     },
                     child: _passwordVisible
-                        ? const Icon(Icons.remove_red_eye_rounded)
+                        ? const Icon(Icons.remove_red_eye_rounded,color: Colors.grey,)
                         : SvgPicture.asset(ImageConstants.assetEye),
                   ),
                 ),

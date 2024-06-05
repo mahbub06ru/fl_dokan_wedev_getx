@@ -46,6 +46,7 @@ dependencies:
   curved_nav_bar: ^0.0.2
   flutter_easyloading: ^3.0.5
   cached_network_image: ^3.3.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,11 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.\
+
+flutter_icons:
+  image_path: "assets/images/dokan.png"
+  android: true
+  ios: true
 
 flutter_native_splash:
   color: "#FFFFFF"

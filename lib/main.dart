@@ -25,7 +25,7 @@ void configLoading() {
     ..loadingStyle = EasyLoadingStyle.dark
     ..indicatorSize = 45.0
     ..radius = 10.0
-    ..progressColor = Colors.black
+    ..progressColor = Colors.yellow
     ..backgroundColor = AppColors.primary
     ..indicatorColor = Colors.black
     ..textColor = Colors.black

@@ -77,7 +77,7 @@ class AuthController extends GetxController {
 
       Get.to(() => SignInScreen());
     } else {
-      Get.snackbar('Error', 'Login failed');
+      Get.snackbar('Error', 'Signup failed');
     }
     isLoading.value = false;
     EasyLoading.dismiss();

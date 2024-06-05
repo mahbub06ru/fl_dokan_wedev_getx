@@ -4,6 +4,7 @@ import 'package:dokan/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -33,8 +34,18 @@ void configLoading() {
     ..dismissOnTap = false
     ..customAnimation = CustomAnimation();
 }
+
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   configLoading();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  FlutterNativeSplash.remove();
+
   runApp(MyApp());
 }
 
@@ -61,7 +72,7 @@ class MyApp extends StatelessWidget {
             getPages: [
               GetPage(name: '/SignInScreen', page: () => SignInScreen()),
               GetPage(name: '/update', page: () => UpdateUserPage()),
-              GetPage(name: '/home', page: () => ProductPage()),
+              GetPage(name: '/ProductPage', page: () => ProductPage()),
               GetPage(name: '/MyHomePage', page: () => MyHomePage()),
               GetPage(name: '/ProfileUpdatePage', page: () => ProfileUpdatePage()),
             ],

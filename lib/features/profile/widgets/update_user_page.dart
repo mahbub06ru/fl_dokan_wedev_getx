@@ -23,7 +23,7 @@ class UpdateUserPage extends StatelessWidget {
           children: [
             Obx(() {
               if (userController.isLoading.value) {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               } else {
                 firstNameController.text = userController.firstName.value;
                 lastNameController.text = userController.lastName.value;

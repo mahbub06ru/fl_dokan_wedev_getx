@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import 'controller/auth_controller.dart';
-import 'utils/image_constants.dart';
+import '../../../controller/auth_controller.dart';
+import '../../../utils/image_constants.dart';
 
 class UpdateUserPage extends StatelessWidget {
   final AuthController userController = Get.put(AuthController());

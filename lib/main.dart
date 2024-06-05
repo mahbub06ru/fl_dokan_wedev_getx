@@ -1,5 +1,5 @@
 import 'package:dokan/features/home/screens/product_page.dart';
-import 'package:dokan/update_user_page.dart';
+import 'package:dokan/features/profile/widgets/update_user_page.dart';
 import 'package:dokan/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import 'features/home/screens/home_page.dart';
 import 'features/sign_up/pages/profile_update_page.dart';
 import 'features/sign_in/screens/sign_in_page.dart';
-import 'login_page.dart';
 import 'utils/custom_aanimationn.dart';
 
 //resources
@@ -60,7 +59,6 @@ class MyApp extends StatelessWidget {
             // initialRoute: '/',
             initialRoute: '/SignInScreen',
             getPages: [
-              GetPage(name: '/', page: () => LoginPage()),
               GetPage(name: '/SignInScreen', page: () => SignInScreen()),
               GetPage(name: '/update', page: () => UpdateUserPage()),
               GetPage(name: '/home', page: () => ProductPage()),

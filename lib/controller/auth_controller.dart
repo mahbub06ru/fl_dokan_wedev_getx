@@ -1,6 +1,6 @@
 import 'package:dokan/features/sign_in/screens/sign_in_page.dart';
 import 'package:dokan/features/home/screens/product_page.dart';
-import 'package:dokan/update_user_page.dart';
+import 'package:dokan/features/profile/widgets/update_user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';

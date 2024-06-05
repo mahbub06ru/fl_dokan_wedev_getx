@@ -51,7 +51,7 @@ class AuthController extends GetxController {
       print("First Name: ${firstName.value}");
       print("Last Name: ${lastName.value}");
 
-      // Get.back();
+      Get.back();
       Get.to(()=> MyHomePage());
       // Get.to(() => ProductPage());
     } else {
